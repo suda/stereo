@@ -4,8 +4,9 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import enums
 from reportlab.platypus import Paragraph
 from reportlab.pdfbase.pdfmetrics import stringWidth
+from .base import BaseField
 
-class TextField():
+class TextField(BaseField):
     TEXT_ALIGN_LEFT=enums.TA_LEFT
     TEXT_ALIGN_CENTER=enums.TA_CENTER
     TEXT_ALIGN_RIGHT=enums.TA_RIGHT
@@ -16,15 +17,9 @@ class TextField():
     fit_text=True
     text_align=TEXT_ALIGN_LEFT
     color='#000000'
-    top=0
-    left=0
-    width=0
-    height=0
 
     def __init__(self, layout, canvas, data):
-        self._layout = layout
-        self._canvas = canvas
-        self.data = data
+        super(TextField, self).__init__(layout, canvas, data)
         self._offset_top = 0
 
         if self.width == 0:
