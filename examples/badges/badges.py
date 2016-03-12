@@ -13,8 +13,9 @@ class NameField(TextField):
     width = 238
     left = 10
 
-    # def render(self):
-    #     self.text = self.text.decode('utf-8').upper()
+    def render(self):
+        self.data = self.data.upper()
+        super(NameField, self).render()
 
 class RoleField(TextField):
     font_name = 'Limelight'
