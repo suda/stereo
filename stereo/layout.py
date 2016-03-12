@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import csv
 import hashlib
 import click, six
 from reportlab.pdfgen import canvas
@@ -25,20 +24,23 @@ class Layout():
     fonts={}
     debug_fields=False
 
-    def __init__(self, data_file, output_dir, template_file, skip_first_row):
+    def __init__(self, data_file=None, output_dir=None, template_file=None, skip_first_row=None):
         # Override layout defaults
-        if data_file:
+        if data_file is not None:
             self.data_file = data_file
-        if output_dir:
+        if output_dir is not None:
             self.output_dir = output_dir
-        if template_file:
+        if template_file is not None:
             self.template_file = template_file
-        if skip_first_row:
+        if skip_first_row is not None:
             self.skip_first_row = skip_first_row
+
+        self._init_pdf()
 
     def _init_pdf(self):
         # Register fonts
         for name, filename in six.iteritems(self.fonts):
+            # TODO: Use logging
             click.secho('  Registering %s as %s' % (filename, name), fg='cyan')
             pdfmetrics.registerFont(TTFont(name, filename))
 
@@ -50,12 +52,15 @@ class Layout():
         if os.path.exists(self.output_dir) and not os.access(self.output_dir, os.W_OK):
             raise click.UsageError("Output is not writable: %s\n" % self.output_dir)
 
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
+
     def generate_filename(self, row):
         m = hashlib.md5()
         m.update(''.join(row).encode('utf-8'))
         return str(m.hexdigest())
 
-    def generate_row(self, row):
+    def generate_document(self, data):
         packet = StringIO()
         template = PdfFileReader(open(self.template_file, 'rb'))
         c = canvas.Canvas(packet, pagesize=(self.width, self.height))
@@ -63,7 +68,7 @@ class Layout():
         i = 0
         for field_cls in self.fields:
             # TODO: Catch exception if there is less columns than fields
-            field = field_cls(self, c, row[i])
+            field = field_cls(self, c, data[i])
             field.render()
             i += 1
 
@@ -78,27 +83,7 @@ class Layout():
         output.addPage(page)
 
         # Save file
-        filename = "%s/%s.pdf" % (self.output_dir, self.generate_filename(row))
+        filename = "%s/%s.pdf" % (self.output_dir, self.generate_filename(data))
         outputStream = open(filename, 'wb')
         output.write(outputStream)
         outputStream.close()
-
-    def run(self):
-        # Check files/paths
-        self._check_paths()
-
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
-        # TODO: Use logging
-        click.secho('Generating documents...', fg='white')
-
-        # Init PDF generator
-        self._init_pdf()
-
-        self._data = csv.reader(open(self.data_file))
-        if self.skip_first_row:
-            next(self._data)
-
-        # TODO: Show info about rows count
-        for row in self._data:
-            self.generate_row(row)
