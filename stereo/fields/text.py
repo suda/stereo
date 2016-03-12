@@ -21,20 +21,20 @@ class TextField():
     width=0
     height=0
 
-    def __init__(self, model, canvas, data):
-        self._model = model
+    def __init__(self, layout, canvas, data):
+        self._layout = layout
         self._canvas = canvas
         self.data = data
         self._offset_top = 0
 
         if self.width == 0:
-            self.width = self._model.width
+            self.width = self._layout.width
 
     def render(self):
         style = getSampleStyleSheet()['Normal']
         style.alignment = self.text_align
         style.fontName = self.font_name
-        if self._model.debug_fields:
+        if self._layout.debug_fields:
             style.backColor = "rgba(255, 0, 0, 0.5)"
 
         if self.fit_text:
@@ -55,5 +55,5 @@ class TextField():
 
         p = Paragraph('<font color="%s">%s</font>' % (self.color, self.data), style)
         p.wrap(self.width, self.height)
-        top = self._model.height - self.top - self.height - self._offset_top
+        top = self._layout.height - self.top - self.height - self._offset_top
         p.drawOn(self._canvas, self.left, top)

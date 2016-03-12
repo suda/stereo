@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from stereo.model import Model
+from stereo.layout import Layout

@@ -14,7 +14,7 @@ try:
 except ImportError:
     from io import BytesIO as StringIO
 
-class Model():
+class Layout():
     data_file=None
     template_file=None
     output_dir=None
@@ -26,7 +26,7 @@ class Model():
     debug_fields=False
 
     def __init__(self, data_file, output_dir, template_file, skip_first_row):
-        # Override model defaults
+        # Override layout defaults
         if data_file:
             self.data_file = data_file
         if output_dir:

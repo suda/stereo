@@ -19,25 +19,25 @@ def _import_file(filepath):
             sys.path.pop(0)
     return module
 
-def _iter_model_classes(module):
-    from stereo import Model
+def _iter_layout_classes(module):
+    from stereo import Layout
 
     for obj in six.itervalues(vars(module)):
         if inspect.isclass(obj) and \
-           issubclass(obj, Model) and \
+           issubclass(obj, Layout) and \
            obj.__module__ == module.__name__:
             yield obj
 
 def generate(filename, data_file, output_dir, template_file, skip_first_row):
     if not os.path.exists(filename):
-        raise click.UsageError("File not found: %s\n" % filename)
+        raise click.UsageError("Layout not found: %s\n" % filename)
     try:
         module = _import_file(filename)
     except (ImportError, ValueError) as e:
         raise click.UsageError("Unable to load %r: %s\n" % (filename, e))
-    model_classes = list(_iter_model_classes(module))
-    if not model_classes:
-        raise click.UsageError("No model found in file: %s\n" % filename)
-    model_cls = model_classes.pop()
-    model = model_cls(data_file, output_dir, template_file, skip_first_row)
-    model.run()
+    layout_classes = list(_iter_layout_classes(module))
+    if not layout_classes:
+        raise click.UsageError("No layout found in file: %s\n" % filename)
+    layout_cls = layout_classes.pop()
+    layout = layout_cls(data_file, output_dir, template_file, skip_first_row)
+    layout.run()

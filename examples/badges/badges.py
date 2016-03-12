@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from stereo import Model
+from stereo import Layout
 from stereo.fields import TextField
 
 class NameField(TextField):
@@ -24,7 +24,7 @@ class RoleField(TextField):
     color='#222222'
     top=30
 
-class Badge(Model):
+class Badge(Layout):
     data_file='guests.csv'
     template_file='template.pdf'
     output_dir='output'
