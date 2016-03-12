@@ -14,15 +14,15 @@ except ImportError:
     from io import BytesIO as StringIO
 
 class Layout():
-    data_file=None
-    template_file=None
-    output_dir=None
-    skip_first_row=True
-    width=0
-    height=0
-    fields=[]
-    fonts={}
-    debug_fields=False
+    data_file = None
+    template_file = None
+    output_dir = None
+    skip_first_row = True
+    width = 0
+    height = 0
+    fields = []
+    fonts = {}
+    debug_fields = False
 
     def __init__(self, data_file=None, output_dir=None, template_file=None, skip_first_row=None):
         # Override layout defaults

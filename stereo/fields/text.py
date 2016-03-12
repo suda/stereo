@@ -7,16 +7,16 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from .base import BaseField
 
 class TextField(BaseField):
-    TEXT_ALIGN_LEFT=enums.TA_LEFT
-    TEXT_ALIGN_CENTER=enums.TA_CENTER
-    TEXT_ALIGN_RIGHT=enums.TA_RIGHT
-    TEXT_ALIGN_JUSTIFY=enums.TA_JUSTIFY
+    TEXT_ALIGN_LEFT = enums.TA_LEFT
+    TEXT_ALIGN_CENTER = enums.TA_CENTER
+    TEXT_ALIGN_RIGHT = enums.TA_RIGHT
+    TEXT_ALIGN_JUSTIFY = enums.TA_JUSTIFY
 
-    font_name=None
-    font_size=0
-    fit_text=True
-    text_align=TEXT_ALIGN_LEFT
-    color='#000000'
+    font_name = None
+    font_size = 0
+    fit_text = True
+    text_align = TEXT_ALIGN_LEFT
+    color = '#000000'
 
     def __init__(self, layout, canvas, data):
         super(TextField, self).__init__(layout, canvas, data)
