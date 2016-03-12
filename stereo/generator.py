@@ -39,4 +39,5 @@ def generate(filename, data_file, output_dir, template_file, skip_first_row):
     if not model_classes:
         raise click.UsageError("No model found in file: %s\n" % filename)
     model_cls = model_classes.pop()
-    model_cls.run(data_file, output_dir, template_file, skip_first_row)
+    model = model_cls(data_file, output_dir, template_file, skip_first_row)
+    model.run()
