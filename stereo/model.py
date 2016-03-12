@@ -23,6 +23,7 @@ class Model():
     height=0
     fields=[]
     fonts={}
+    debug_fields=False
 
     def __init__(self, data_file, output_dir, template_file, skip_first_row):
         # Override model defaults
@@ -88,7 +89,7 @@ class Model():
 
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
-
+        # TODO: Use logging
         click.secho('Generating documents...', fg='white')
 
         # Init PDF generator

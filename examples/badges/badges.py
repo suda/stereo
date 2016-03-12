@@ -9,7 +9,9 @@ class NameField(TextField):
     fit_text=True
     text_align=TextField.TEXT_ALIGN_CENTER
     color='#222222'
-    top=60
+    top=0
+    width=238
+    left=10
 
     # def render(self):
     #     self.text = self.text.decode('utf-8').upper()
@@ -20,7 +22,7 @@ class RoleField(TextField):
     fit_text=True
     text_align=TextField.TEXT_ALIGN_CENTER
     color='#222222'
-    top=85
+    top=30
 
 class Badge(Model):
     data_file='guests.csv'
@@ -28,7 +30,7 @@ class Badge(Model):
     output_dir='output'
     skip_first_row=True
     width=258
-    height=173
+    height=127
     fields=[
         NameField,
         RoleField
@@ -36,6 +38,7 @@ class Badge(Model):
     fonts={
         'Limelight': 'Limelight-Regular.ttf'
     }
+    debug_fields=False
 
     def generate_filename(self, row):
         return str(row[0]).replace(' ', '-').strip()
