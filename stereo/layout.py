@@ -47,7 +47,7 @@ class Layout():
     def _check_paths(self):
         if not os.path.exists(self.data_file):
             raise click.UsageError("Data file not found: %s\n" % self.data_file)
-        if not os.path.exists(self.template_file):
+        if self.template_file is not None and not os.path.exists(self.template_file):
             raise click.UsageError("Template file not found: %s\n" % self.template_file)
         if os.path.exists(self.output_dir) and not os.access(self.output_dir, os.W_OK):
             raise click.UsageError("Output is not writable: %s\n" % self.output_dir)
@@ -62,8 +62,8 @@ class Layout():
 
     def generate_document(self, data):
         packet = StringIO()
-        # TODO: Allow documents without templates
-        template = PdfFileReader(open(self.template_file, 'rb'))
+        if self.template_file is not None:
+            template = PdfFileReader(open(self.template_file, 'rb'))
         c = canvas.Canvas(packet, pagesize=(self.width, self.height))
 
         i = 0
@@ -78,9 +78,12 @@ class Layout():
         packet.seek(0)
         text = PdfFileReader(packet)
         output = PdfFileWriter()
-        # Merge text with base
-        page = template.getPage(0)
-        page.mergePage(text.getPage(0))
+        if self.template_file is not None:
+            # Merge text with base
+            page = template.getPage(0)
+            page.mergePage(text.getPage(0))
+        else:
+            page = text.getPage(0)
         output.addPage(page)
 
         # Save file
