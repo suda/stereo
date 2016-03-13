@@ -25,7 +25,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version='0.1.2',
 
-    description='Generate documents from CSV file in batch',
+    description='Generate PDF documents in batch',
     long_description=long_description,
 
     # The project's main homepage.
