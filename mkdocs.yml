@@ -1,0 +1,5 @@
+site_name: Stereo Documentation
+repo_url: https://github.com/suda/stereo
+pages:
+- Home: index.md
+theme: readthedocs
