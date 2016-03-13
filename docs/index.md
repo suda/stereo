@@ -1,3 +1,12 @@
-# Stereo
+# Stereo documentation
 
-Generate documents from CSV file in batch.
+Generate PDF documents in batch.
+
+## Usage
+
+* [Generating documents from CSV files](generating-from-csv.md)
+
+## Basic concepts
+
+* [Layout](layout.md)
+* [Fields](fields.md)
