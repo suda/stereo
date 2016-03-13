@@ -1,0 +1,17 @@
+language: python
+python: 3.4
+sudo: false
+install:
+- pip install -U tox twine wheel
+cache:
+  directories:
+  - $HOME/.cache/pip
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: suda
+  on:
+    tags: true
+    repo: suda/stereo
+  password:
+    secure: eQReMKXhTsY0cli7wTpVuIPQ45rGRFuLvl33Td49DCluIDOS61UenaLjBgpjHtUvJi/IuKcFYDv8gLw1mnjHKAKcBkgAaUN1aVyXLxyx8ZGxDZYMGvVv1EnuFO99hGvL2qBkTxES54G97aSJct/76L5fin/f/whZoB33Bs9a6QrcRRuTLFoVA6A+23eCIoMz3hdCLzSPvF7CDNfsCNC+j8kKa3IkhlnzurJVQmROTOFmQSD2DchnWOt+LdgFHABWMYNv5PVy2lNI9HGWSAzYpBIEDwuoij5sCi3X5RGkFpBpjyjGc880HcMCCtK4X1kBOWhVvgqBTyKW6DqzvHq1q38Xxh2GslD8E2AFrYlWjjc6j2kQH/DFdtu5xJUyDPJnjGwIEs5R6Pu+bAQPkG0p65RnNvfb8NHwa9IBYo9zM8+9SRfcxePdIat5hvCK2GRNnhQh/66qmn9oV/H9UDe1RldiCx37jb87IJs3AnEeYGzWz2PsYcpXp/9eZF4FglqzfGA4OqZVqFmF5nkhfmvTIAT3WFnOU2EpjB3KcV/wA0U+1gbZa2om0GGn7Nchw0EURrC+t429ef7Rqevd7NP4NMW95Hvpjqq5UxxRHnDvEyw2k7GVv9/PgpDGcbbONuhm7qX87xiMyphnoZJH3alJ+0oG6T9LdAIWQbXWc7DzEOs=
