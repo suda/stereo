@@ -62,6 +62,7 @@ class Layout():
 
     def generate_document(self, data):
         packet = StringIO()
+        # TODO: Allow documents without templates
         template = PdfFileReader(open(self.template_file, 'rb'))
         c = canvas.Canvas(packet, pagesize=(self.width, self.height))
 

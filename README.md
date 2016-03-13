@@ -1,5 +1,6 @@
 # ![](artwork/logo.png) Stereo
 
+Generate PDF documents in batch.
 
 # Notes
 
