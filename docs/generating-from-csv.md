@@ -53,3 +53,7 @@ Other possible options are:
 -t, --template-file TEXT   PDF file used as template
 -s, --skip-first-row TEXT  Skip the first row in CSV file?
 ```
+
+## Example
+
+An example usage of command line PDF generation can be [found in this project](https://github.com/suda/stereo/tree/master/examples/badges).
